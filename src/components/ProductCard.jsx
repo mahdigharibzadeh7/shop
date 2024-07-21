@@ -1,3 +1,6 @@
+//react-router-dom
+import { Link } from "react-router-dom";
+
 //context
 import { useContext } from "react";
 import { ProductsProvider } from "../pages/Products";
@@ -26,7 +29,9 @@ function ProductCard() {
           <div className="font-semibold ml-5 mt-3">${product.price}</div>
           <div className="flex justify-between items-center mx-5 mt-7 mb-3 text-2xl text-orange-500">
             <div>
-              <TbListDetails />
+              <Link to={`${product.id}`}>
+                <TbListDetails />
+              </Link>
             </div>
             <div className="bg-orange-500 text-white rounded-lg p-1">
               <TbShoppingBagCheck />
