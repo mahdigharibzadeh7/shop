@@ -12,4 +12,7 @@ products_api.interceptors.response.use((res) => {
   return res.data;
 });
 
+const getProductById = (id) => products_api.get(`/${id}`);
+
 export default products_api;
+export { getProductById };
