@@ -7,7 +7,9 @@ import products_api from "../services/config";
 import ProductCard from "../components/ProductCard";
 import SearchBox from "../components/SearchBox";
 import Categories from "../components/Categories";
+import Loader from "../components/Loader";
 
+//context
 export const ProductsProvider = createContext();
 
 function Products() {
@@ -18,12 +20,16 @@ function Products() {
   return (
     <ProductsProvider.Provider value={{ products, setProducts }}>
       <SearchBox />
-      <div className="grid grid-cols-11 gap-x-5 my-10">
-        <div className="col-span-9 grid grid-cols-12 gap-5">
-          <ProductCard />
+      {products.length ? (
+        <div className="grid grid-cols-11 gap-x-5 my-10">
+          <div className="col-span-9 grid grid-cols-12 gap-5">
+            <ProductCard />
+          </div>
+          <Categories />
         </div>
-        <Categories />
-      </div>
+      ) : (
+        <Loader />
+      )}
     </ProductsProvider.Provider>
   );
 }
