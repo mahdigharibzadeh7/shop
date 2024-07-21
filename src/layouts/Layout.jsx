@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 function Layout({ children }) {
   return (
-    <div className="mx-52 text-white">
+    <div className="mx-52">
       <Header />
       {children}
       <Footer />
