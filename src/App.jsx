@@ -1,5 +1,8 @@
+//Layout
+import Layout from "./layouts/Layout";
+
 function App() {
-  return <div></div>;
+  return <Layout></Layout>;
 }
 
 export default App;
