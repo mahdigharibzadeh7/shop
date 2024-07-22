@@ -1,18 +1,13 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 //services
 import products_api from "../services/config";
 
-//context
-import { ProductsProvider } from "../pages/Products";
-
 //icons
 import { IoSearchSharp } from "react-icons/io5";
 
-function SearchBox() {
+function SearchBox({ setProducts }) {
   const [search, setSearch] = useState("");
-
-  const { setProducts } = useContext(ProductsProvider);
 
   const searchHandler = () => {
     if (search) {
