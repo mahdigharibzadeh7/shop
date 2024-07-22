@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+//react-router-dom
+import { useSearchParams } from "react-router-dom";
+
 //services
 import products_api from "../services/config";
 
@@ -9,6 +12,8 @@ import { IoSearchSharp } from "react-icons/io5";
 function SearchBox({ setProducts }) {
   const [search, setSearch] = useState("");
 
+  const [, setSearchParams] = useSearchParams();
+
   const searchHandler = () => {
     if (search) {
       products_api.get().then((res) => {
@@ -17,6 +22,8 @@ function SearchBox({ setProducts }) {
         );
         setProducts(newProducts);
       });
+
+      setSearchParams({ search });
     } else products_api.get().then((res) => setProducts(res));
 
     setSearch("");
