@@ -14,5 +14,10 @@ products_api.interceptors.response.use((res) => {
 
 const getProductById = (id) => products_api.get(`/${id}`);
 
+const getCategories = () => products_api.get("/categories");
+
+const getProductsByCategory = (category) =>
+  products_api.get(`/category/${category}`);
+
 export default products_api;
-export { getProductById };
+export { getProductById, getCategories, getProductsByCategory };
