@@ -1,20 +1,39 @@
-//cotext
-import { useContext } from "react";
-import { ProductsProvider } from "../pages/Products";
+import { useEffect, useState } from "react";
+
+//react-router-dom
+import { useSearchParams } from "react-router-dom";
+
+//services
+import products_api, {
+  getCategories,
+  getProductsByCategory,
+} from "../services/config";
 
 //icons
 import { TfiMenuAlt } from "react-icons/tfi";
 
-function Categories() {
-  const category = [];
+function Categories({ setProducts }) {
+  const [buttonSelected, setButtonSelected] = useState("");
+  const [category, setCategory] = useState(["All"]);
 
-  const { products } = useContext(ProductsProvider);
+  const [, setCategoryParams] = useSearchParams();
 
-  const unique = products.filter((obj, index) => {
-    return index === products.findIndex((o) => obj.category === o.category);
-  });
+  useEffect(() => {
+    getCategories().then((res) =>
+      setCategory((category) => [...category, ...res])
+    );
+  }, []);
 
-  unique.map((u) => category.push(u.category));
+  const selectHandler = (e) => {
+    const value = e.target.innerText;
+    setButtonSelected(value);
+
+    if (value !== "All")
+      getProductsByCategory(value).then((res) => setProducts(res));
+    else products_api.get().then((res) => setProducts(res));
+
+    setCategoryParams({ category: value });
+  };
 
   return (
     <div className="col-span-2 h-fit border-2 border-zinc-300 border-dashed rounded-lg bg-white px-6 py-3">
@@ -23,10 +42,17 @@ function Categories() {
         Categories
       </div>
       <ul className="font-medium">
-        <li className="pt-2">All</li>
         {category.map((category) => (
           <li className="py-1" key={category}>
-            {category}
+            <button
+              className={`${
+                buttonSelected === category &&
+                "bg-mainBgColor text-mainTxtColor"
+              } text-left px-4 w-40 py-1 rounded-lg`}
+              onClick={selectHandler}
+            >
+              {category}
+            </button>
           </li>
         ))}
       </ul>
