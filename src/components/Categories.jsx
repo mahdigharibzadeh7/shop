@@ -18,7 +18,7 @@ function Categories() {
 
   return (
     <div className="col-span-2 h-fit border-2 border-zinc-300 border-dashed rounded-lg bg-white px-6 py-3">
-      <div className="flex items-center gap-x-2 text-orange-500 font-bold">
+      <div className="flex items-center gap-x-2 text-mainBgColor font-bold">
         <TfiMenuAlt />
         Categories
       </div>

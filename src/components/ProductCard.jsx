@@ -27,7 +27,7 @@ function ProductCard({ product: { id, image, title, price } }) {
         {title}
       </div>
       <div className="font-semibold ml-5 mt-3">${price}</div>
-      <div className="flex justify-between items-center mx-5 mt-7 mb-5 text-2xl text-orange-500">
+      <div className="flex justify-between items-center mx-5 mt-7 mb-5 text-2xl text-mainBgColor">
         <div>
           <Link to={`${id}`}>
             <TbListDetails />
@@ -36,21 +36,21 @@ function ProductCard({ product: { id, image, title, price } }) {
         {isShop ? (
           <div className="flex items-center">
             <button
-              className="flex items-center justify-center bg-orange-500 rounded-lg text-white w-7 h-7 text-lg"
+              className="flex items-center justify-center bg-mainBgColor rounded-lg text-mainTxtColor w-7 h-7 text-lg"
               onClick={() => setCount((count) => count - 1)}
             >
               {count === 1 ? <BsTrash onClick={() => setIsShop(false)} /> : "-"}
             </button>
             <span className="mx-5 text-black text-lg">{count}</span>
             <button
-              className="flex items-center justify-center bg-orange-500 rounded-lg text-white w-7 h-7 text-lg"
+              className="flex items-center justify-center bg-mainBgColor rounded-lg text-mainTxtColor w-7 h-7 text-lg"
               onClick={() => setCount((count) => count + 1)}
             >
               +
             </button>
           </div>
         ) : (
-          <div className="bg-orange-500 text-white rounded-lg p-1">
+          <div className="bg-mainBgColor text-mainTxtColor rounded-lg p-1">
             <TbShoppingBagCheck
               className="cursor-pointer"
               onClick={shopHandler}

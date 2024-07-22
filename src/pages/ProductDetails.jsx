@@ -22,7 +22,7 @@ function ProductDetails() {
     <>
       {product.id ? (
         <div className="flex my-10">
-          <div className="border-2 border-dashed border-orange-500 rounded-[3rem] min-w-72 h-fit bg-white">
+          <div className="border-2 border-dashed border-mainBgColor rounded-[3rem] min-w-72 h-fit bg-white">
             <img
               className="max-w-60 mx-auto my-5"
               src={product.image}
@@ -31,22 +31,22 @@ function ProductDetails() {
           </div>
           <div className="grid grid-cols-12 border-2 border-dashed border-zinc-300 rounded-[3rem] ml-10 p-7">
             <div className="col-span-9 w-[80%]">
-              <div className="font-bold text-xl text-orange-500">
+              <div className="font-bold text-xl text-mainBgColor">
                 {product.title}
               </div>
               <p className="my-7">{product.description}</p>
               <div className="flex items-center gap-x-2 font-bold">
-                <FaGg className="text-orange-500 text-lg" />
+                <FaGg className="text-mainBgColor text-lg" />
                 {product.category}
               </div>
               <div className="flex items-center gap-x-2 font-bold">
-                <IoMdPricetag className="text-orange-500 text-lg" />$
+                <IoMdPricetag className="text-mainBgColor text-lg" />$
                 {product.price}
               </div>
             </div>
             <div className="col-span-3 content-end">
               <Link to="/">
-                <button className="flex items-center gap-x-2 bg-orange-500 text-white px-3 py-1 rounded-lg">
+                <button className="flex items-center gap-x-2 bg-mainBgColor text-mainTxtColor px-3 py-1 rounded-lg">
                   <FaArrowLeftLong />
                   Back to Shop
                 </button>
