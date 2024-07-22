@@ -1,11 +1,13 @@
 import { useContext, useState } from "react";
 
+//services
+import products_api from "../services/config";
+
 //context
 import { ProductsProvider } from "../pages/Products";
 
 //icons
 import { IoSearchSharp } from "react-icons/io5";
-import products_api from "../services/config";
 
 function SearchBox() {
   const [search, setSearch] = useState("");
