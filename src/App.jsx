@@ -6,7 +6,7 @@ import Layout from "./layouts/Layout";
 
 //pages
 import Products from "./pages/Products";
-import Product from "./pages/Product";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/products" />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/products/:id" element={<Product />} />
+        <Route path="/products/:id" element={<ProductDetails />} />
       </Routes>
     </Layout>
   );

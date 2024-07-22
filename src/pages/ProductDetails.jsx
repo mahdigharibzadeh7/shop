@@ -12,7 +12,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { IoMdPricetag } from "react-icons/io";
 import { FaGg } from "react-icons/fa";
 
-function Product() {
+function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   useEffect(() => {
@@ -22,9 +22,9 @@ function Product() {
     <>
       {product.id ? (
         <div className="flex my-10">
-          <div className="border-2 border-dashed border-orange-500 rounded-[3rem] w-[70%] h-fit bg-white">
+          <div className="border-2 border-dashed border-orange-500 rounded-[3rem] min-w-72 h-fit bg-white">
             <img
-              className="w-[75%] mx-auto my-5"
+              className="max-w-60 mx-auto my-5"
               src={product.image}
               alt={product.title}
             />
@@ -61,4 +61,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default ProductDetails;
