@@ -19,7 +19,7 @@ function ProductCard() {
           className="col-span-4 border-2 border-dashed border-zinc-300 rounded-xl bg-white"
         >
           <img
-            className="w-36 h-48 mx-auto my-5"
+            className="w-36 h-40 mx-auto my-5"
             src={product.image}
             alt={product.title}
           />
