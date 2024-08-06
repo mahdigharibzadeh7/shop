@@ -4,15 +4,12 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 //services
-import products_api, {
-  getCategories,
-  getProductsByCategory,
-} from "../services/config";
+import { getCategories } from "../services/config";
 
 //icons
 import { TfiMenuAlt } from "react-icons/tfi";
 
-function Categories({ setProducts }) {
+function Categories({ setQuery }) {
   const [buttonSelected, setButtonSelected] = useState("");
   const [category, setCategory] = useState(["All"]);
 
@@ -27,10 +24,7 @@ function Categories({ setProducts }) {
   const selectHandler = (e) => {
     const value = e.target.innerText;
     setButtonSelected(value);
-
-    if (value !== "All")
-      getProductsByCategory(value).then((res) => setProducts(res));
-    else products_api.get().then((res) => setProducts(res));
+    if (value !== "All") setQuery((query) => ({ ...query, category: value }));
 
     setCategoryParams({ category: value });
   };

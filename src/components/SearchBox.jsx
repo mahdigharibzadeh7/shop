@@ -1,32 +1,18 @@
-import { useState } from "react";
-
 //react-router-dom
 import { useSearchParams } from "react-router-dom";
-
-//services
-import products_api from "../services/config";
 
 //icons
 import { IoSearchSharp } from "react-icons/io5";
 
-function SearchBox({ setProducts }) {
-  const [search, setSearch] = useState("");
+function SearchBox({ search, setSearch, setQuery }) {
 
   const [, setSearchParams] = useSearchParams();
 
   const searchHandler = () => {
-    if (search) {
-      products_api.get().then((res) => {
-        const newProducts = res.filter((product) =>
-          product.title.toLowerCase().includes(search)
-        );
-        setProducts(newProducts);
-      });
-
       setSearchParams({ search });
-    } else products_api.get().then((res) => setProducts(res));
+      setQuery((query) => ({ ...query, search }));
 
-    setSearch("");
+    // setSearch("");
   };
 
   return (
