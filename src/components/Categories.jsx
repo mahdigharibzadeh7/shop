@@ -36,9 +36,9 @@ function Categories({ queryCategory, setQuery }) {
         {category.map((category) => (
           <li className="py-1" key={category}>
             <button
-              className={`${
+              className={`hover:text-mainBgColor ${
                 buttonSelected === category &&
-                "bg-mainBgColor text-mainTxtColor"
+                "bg-mainBgColor text-mainTxtColor hover:text-mainTxtColor"
               } text-left px-2 w-40 py-1 rounded-lg`}
               onClick={selectHandler}
             >
