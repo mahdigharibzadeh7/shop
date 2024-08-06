@@ -46,6 +46,35 @@ const getInitialQuery = (searchParams) => {
   return query;
 };
 
+const price_counter_calc = (products) => {
+  const itemsCounter = products.reduce(
+    (counter, product) => counter + product.quantity,
+    0
+  );
+  const totalPrice = products
+    .reduce(
+      (totalPrice, product) => totalPrice + product.price * product.quantity,
+      0
+    )
+    .toFixed(2);
+
+  return { itemsCounter, totalPrice };
+};
+
+const counterHandler = (type, count, setCount, dispatch, rating, product) => {
+  if (type === "minus") {
+    if (count > 1) {
+      setCount((count) => count - 1);
+      dispatch({ type: "MINUS_ITEM", payload: product });
+    }
+  } else {
+    if (count < rating.count) {
+      setCount((count) => count + 1);
+      dispatch({ type: "ADD_ITEM", payload: product });
+    }
+  }
+};
+
 export {
   shortenText,
   categoryCapitalization,
@@ -53,4 +82,6 @@ export {
   filterProducts,
   createQueryObject,
   getInitialQuery,
+  price_counter_calc,
+  counterHandler,
 };
