@@ -12,22 +12,22 @@ import PageNotFound from "./pages/404";
 
 //context
 import ProductProvider from "./contexts/ProductContext";
+import CartProvider from "./contexts/CartContext";
 
 function App() {
   return (
     <Layout>
-      <ProductProvider>
-        <Routes>
-          <Route index element={<Navigate to="/products" replace />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:id" element={<ProductDetails />} />
-          {/* <Route
-            path="/checkout"
-            element={<CheckOut totalCount={totalCount} />}
-          /> */}
-          <Route path="/*" element={<PageNotFound />} />
-        </Routes>
-      </ProductProvider>
+      <CartProvider>
+        <ProductProvider>
+          <Routes>
+            <Route index element={<Navigate to="/products" replace />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/products/:id" element={<ProductDetails />} />
+            <Route path="/checkout" element={<CheckOut />} />
+            <Route path="/*" element={<PageNotFound />} />
+          </Routes>
+        </ProductProvider>
+      </CartProvider>
     </Layout>
   );
 }
