@@ -13,7 +13,5 @@ const getProductById = (id) => products_api.get(`/${id}`);
 
 const getCategories = () => products_api.get("/categories");
 
-
-
 export default products_api;
 export { getProductById, getCategories };
