@@ -1,32 +1,44 @@
 import { useEffect, useState } from "react";
 
-//services
-import products_api from "../services/config";
-
 //components
 import ProductCard from "../components/ProductCard";
 import SearchBox from "../components/SearchBox";
 import Categories from "../components/Categories";
 import Loader from "../components/Loader";
 
+//context
+import { useProduct } from "../contexts/ProductContext";
+
+//helpers
+import { filterProducts, searchProducts } from "../helpers/helper";
+
 function Products() {
-  const [products, setProducts] = useState([]);
+  const products = useProduct();
+  const [displayed, setDisplayed] = useState([]);
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState({});
 
   useEffect(() => {
-    products_api.get().then((res) => setProducts(res));
-  }, []);
+    setDisplayed(products);
+  }, [products]);
+
+  useEffect(() => {
+    let finalProducts = searchProducts(products, query.search);
+    finalProducts = filterProducts(finalProducts, query.category);
+    setDisplayed(finalProducts);
+  }, [query]);
 
   return (
     <div>
-      <SearchBox setProducts={setProducts} />
-      {products.length ? (
+      <SearchBox search={search} setSearch={setSearch} setQuery={setQuery} />
+      {displayed.length ? (
         <div className="grid grid-cols-10 gap-x-5 my-10">
           <div className="col-span-8 grid grid-cols-12 gap-5">
-            {products.map((product) => (
+            {displayed.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
-          <Categories setProducts={setProducts} />
+          <Categories setQuery={setQuery} />
         </div>
       ) : (
         <Loader />
