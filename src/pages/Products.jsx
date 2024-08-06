@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 
+//react-router-dom
+import { useSearchParams } from "react-router-dom";
+
 //components
 import ProductCard from "../components/ProductCard";
 import SearchBox from "../components/SearchBox";
@@ -10,19 +13,29 @@ import Loader from "../components/Loader";
 import { useProduct } from "../contexts/ProductContext";
 
 //helpers
-import { filterProducts, searchProducts } from "../helpers/helper";
+import {
+  filterProducts,
+  getInitialQuery,
+  searchProducts,
+} from "../helpers/helper";
 
 function Products() {
   const products = useProduct();
+
   const [displayed, setDisplayed] = useState([]);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState({});
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   useEffect(() => {
+    setQuery(getInitialQuery(searchParams));
     setDisplayed(products);
   }, [products]);
 
   useEffect(() => {
+    setSearch(query.search || "");
+    setSearchParams(query);
     let finalProducts = searchProducts(products, query.search);
     finalProducts = filterProducts(finalProducts, query.category);
     setDisplayed(finalProducts);
@@ -38,7 +51,7 @@ function Products() {
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
-          <Categories setQuery={setQuery} />
+          <Categories queryCategory={query.category} setQuery={setQuery} />
         </div>
       ) : (
         <Loader />
