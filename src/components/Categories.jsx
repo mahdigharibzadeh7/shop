@@ -1,32 +1,29 @@
 import { useEffect, useState } from "react";
 
-//react-router-dom
-import { useSearchParams } from "react-router-dom";
-
 //services
 import { getCategories } from "../services/config";
+
+//helpers
+import { categoryCapitalization, createQueryObject } from "../helpers/helper";
 
 //icons
 import { TfiMenuAlt } from "react-icons/tfi";
 
-function Categories({ setQuery }) {
+function Categories({ queryCategory, setQuery }) {
   const [buttonSelected, setButtonSelected] = useState("");
-  const [category, setCategory] = useState(["All"]);
-
-  const [, setCategoryParams] = useSearchParams();
+  const [category, setCategory] = useState(["all"]);
 
   useEffect(() => {
     getCategories().then((res) =>
       setCategory((category) => [...category, ...res])
     );
+    setButtonSelected(queryCategory || "all");
   }, []);
 
   const selectHandler = (e) => {
-    const value = e.target.innerText;
+    const value = e.target.innerText.toLowerCase();
     setButtonSelected(value);
-    if (value !== "All") setQuery((query) => ({ ...query, category: value }));
-
-    setCategoryParams({ category: value });
+    setQuery((query) => createQueryObject(query, { category: value }));
   };
 
   return (
@@ -42,10 +39,10 @@ function Categories({ setQuery }) {
               className={`${
                 buttonSelected === category &&
                 "bg-mainBgColor text-mainTxtColor"
-              } text-left px-4 w-40 py-1 rounded-lg`}
+              } text-left px-2 w-40 py-1 rounded-lg`}
               onClick={selectHandler}
             >
-              {category}
+              {categoryCapitalization(category)}
             </button>
           </li>
         ))}
