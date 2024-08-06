@@ -1,18 +1,12 @@
-//react-router-dom
-import { useSearchParams } from "react-router-dom";
+//helpers
+import { createQueryObject } from "../helpers/helper";
 
 //icons
 import { IoSearchSharp } from "react-icons/io5";
 
 function SearchBox({ search, setSearch, setQuery }) {
-
-  const [, setSearchParams] = useSearchParams();
-
   const searchHandler = () => {
-      setSearchParams({ search });
-      setQuery((query) => ({ ...query, search }));
-
-    // setSearch("");
+    setQuery((query) => createQueryObject(query, { search }));
   };
 
   return (
