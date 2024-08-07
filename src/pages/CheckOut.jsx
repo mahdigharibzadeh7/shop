@@ -15,8 +15,7 @@ function CheckOut() {
   const [state] = useCart();
 
   useEffect(() => {
-    if (state.checkOut)
-      toast.success("Your payment was successfully done!");
+    if (state.checkOut) toast.success("Your payment was successfully done!");
   }, [state.checkOut]);
 
   return (
