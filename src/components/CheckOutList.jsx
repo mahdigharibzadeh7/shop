@@ -24,8 +24,8 @@ function CheckOutList() {
               alt={product.title}
             />
           </div>
-          <div className="text-ellipsis overflow-hidden whitespace-nowrap w-48">
-            {shortenText(product.title)}
+          <div>
+            {shortenText(product.title)} - ${product.price}
           </div>
           <ShopButtons
             quantity={product.quantity}
