@@ -16,9 +16,9 @@ import CartProvider from "./contexts/CartContext";
 
 function App() {
   return (
-    <Layout>
-      <CartProvider>
-        <ProductProvider>
+    <CartProvider>
+      <ProductProvider>
+        <Layout>
           <Routes>
             <Route index element={<Navigate to="/products" replace />} />
             <Route path="/products" element={<Products />} />
@@ -26,9 +26,9 @@ function App() {
             <Route path="/checkout" element={<CheckOut />} />
             <Route path="/*" element={<PageNotFound />} />
           </Routes>
-        </ProductProvider>
-      </CartProvider>
-    </Layout>
+        </Layout>
+      </ProductProvider>
+    </CartProvider>
   );
 }
 
