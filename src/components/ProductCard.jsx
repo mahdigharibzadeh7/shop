@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 //components
 import ShopButtons from "./ShopButtons";
 
@@ -17,7 +15,7 @@ import { TbListDetails } from "react-icons/tb";
 import { TbShoppingBagCheck } from "react-icons/tb";
 
 function ProductCard({ product }) {
-  const { id, image, title, price, rating } = product;
+  const { id, image, title, price } = product;
 
   const [state, dispatch] = useCart();
 
