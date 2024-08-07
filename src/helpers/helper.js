@@ -61,18 +61,14 @@ const price_counter_calc = (products) => {
   return { itemsCounter, totalPrice };
 };
 
-const counterHandler = (type, count, setCount, dispatch, rating, product) => {
-  if (type === "minus") {
-    if (count > 1) {
-      setCount((count) => count - 1);
-      dispatch({ type: "MINUS_ITEM", payload: product });
-    }
-  } else {
-    if (count < rating.count) {
-      setCount((count) => count + 1);
-      dispatch({ type: "ADD_ITEM", payload: product });
-    }
-  }
+const counterHandler = (type, product, dispatch) => {
+  dispatch({ type, payload: product });
+};
+
+const productQuantity = (state, id) => {
+  const index = state.selectedItems.findIndex((item) => item.id === id);
+  if (index === -1) return 0;
+  else return state.selectedItems[index].quantity;
 };
 
 export {
@@ -84,4 +80,5 @@ export {
   getInitialQuery,
   price_counter_calc,
   counterHandler,
+  productQuantity,
 };
