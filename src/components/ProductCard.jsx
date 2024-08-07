@@ -7,7 +7,7 @@ import ShopButtons from "./ShopButtons";
 import { Link } from "react-router-dom";
 
 //helpers
-import { shortenText } from "../helpers/helper";
+import { shortenText, productQuantity } from "../helpers/helper";
 
 //context
 import { useCart } from "../contexts/CartContext";
@@ -17,16 +17,13 @@ import { TbListDetails } from "react-icons/tb";
 import { TbShoppingBagCheck } from "react-icons/tb";
 
 function ProductCard({ product }) {
-  const [isShop, setIsShop] = useState(false);
-  const [count, setCount] = useState(0);
-
   const { id, image, title, price, rating } = product;
 
-  const [, dispatch] = useCart();
+  const [state, dispatch] = useCart();
+
+  const quantity = productQuantity(state, id);
 
   const shopHandler = () => {
-    setIsShop(true);
-    setCount(1);
     dispatch({ type: "FIRST_BUY", payload: product });
   };
 
@@ -46,22 +43,19 @@ function ProductCard({ product }) {
             <TbListDetails />
           </Link>
         </div>
-        {isShop ? (
-          <ShopButtons
-            count={count}
-            setCount={setCount}
-            setIsShop={setIsShop}
-            dispatch={dispatch}
-            rating={rating}
-            product={product}
-          />
-        ) : (
+        {quantity === 0 ? (
           <div className="bg-mainBgColor text-mainTxtColor rounded-lg p-1">
             <TbShoppingBagCheck
               className="cursor-pointer"
               onClick={shopHandler}
             />
           </div>
+        ) : (
+          <ShopButtons
+            quantity={quantity}
+            dispatch={dispatch}
+            product={product}
+          />
         )}
       </div>
     </div>
