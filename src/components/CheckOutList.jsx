@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 //components
 import ShopButtons from "./ShopButtons";
 
@@ -10,9 +8,6 @@ import { useCart } from "../contexts/CartContext";
 import { shortenText } from "../helpers/helper";
 
 function CheckOutList() {
-  const [count, setCount] = useState(0);
-  const [isShop, setIsShop] = useState(false);
-
   const [state, dispatch] = useCart();
 
   return (
@@ -33,11 +28,8 @@ function CheckOutList() {
             {shortenText(product.title)}
           </div>
           <ShopButtons
-            count={product.quantity}
-            setCount={setCount}
-            setIsShop={setIsShop}
+            quantity={product.quantity}
             dispatch={dispatch}
-            rating={product.rating}
             product={product}
           />
         </div>
